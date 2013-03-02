@@ -1,8 +1,8 @@
 import web
 
-urls = ('/', 'index')
+urls = ('/', 'Index')
 
-class index:
+class Index:
   def GET(self):
     print "GET!!!"
     return "<html><head><title>mkakeibo</title></head><body><h1>Hi</h1></body></html>"

@@ -1,4 +1,5 @@
 from paver.easy import *
+from paver.path import path
 
 @task
 @cmdopts([
@@ -9,4 +10,6 @@ def test(options):
     opts = ['--with-doctest']
     if format == 'verbose': opts.append('--verbose')
     if format == 'xunit': opts.append('--with-xunit')
-    sh('nosetests %s python'%(' '.join(opts)))
+
+    files = path('python/mkakeibo').walk('*.py')
+    sh('nosetests %s %s'%(' '.join(opts), ' '.join(files)))
