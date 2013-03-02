@@ -1,0 +1,21 @@
+!*< paths and defines
+!path lib/fitlibraryweb-2.0.jar
+!path fitlibrary-2.0.jar
+!path lib/*.jar
+!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
+!define REGRACE_LINK {false}
+!define REGRACE_TOC {false}
+
+!define spider {''!-SpiderFixture-!''}
+
+!contents -R2 -g -p -f -h
+
+!|fitlibrary.spider.SpiderFixture|
+
+|''start spider with''|firefox|
+
+|''shutdown browser automatically''|true|
+
+|''get url''|http://127.0.0.1:8080|
+
+|''page source''|'''contains'''|Hi|
