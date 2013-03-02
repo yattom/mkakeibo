@@ -4,5 +4,6 @@ python/Scripts
 python/bin
 python/include
 python/lib
+python/man
 *.pyc
 *.pyo
