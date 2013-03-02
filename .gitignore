@@ -1,5 +1,8 @@
 python/Include
 python/Lib
 python/Scripts
+python/bin
+python/include
+python/lib
 *.pyc
 *.pyo
