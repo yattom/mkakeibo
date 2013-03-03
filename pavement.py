@@ -1,5 +1,6 @@
 from paver.easy import *
 from paver.path import path
+import os
 
 @task
 @cmdopts([
@@ -13,3 +14,22 @@ def test(options):
 
     files = path('python/mkakeibo').walk('*.py')
     sh('nosetests %s %s'%(' '.join(opts), ' '.join(files)))
+
+
+FITNESSE_OPTS = [
+    '-d %s'%(path('test/fitnesse').abspath()),
+    '-p 20942'
+]
+
+@task
+def start_fitnesse(options):
+    sh('start-fitnesse ' + ' '.join(FITNESSE_OPTS))
+
+@task
+def stop_fitnesse(options):
+    sh('stop-fitnesse ' + ' '.join(FITNESSE_OPTS))
+
+@task
+def fitnesse(options):
+    sh('run-fitnesse ' + ' '.join(FITNESSE_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=text"')
+
