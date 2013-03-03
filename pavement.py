@@ -31,5 +31,5 @@ def stop_fitnesse(options):
 
 @task
 def fitnesse(options):
-    sh('run-fitnesse ' + ' '.join(FITNESSE_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=text"')
+    sh('run-fitnesse ' + ' '.join(FITNESSE_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=xml" | grep "<.*>" > fitnesse-result.xml')
 
