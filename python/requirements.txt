@@ -1,4 +1,7 @@
+Fabric==1.6.0
 Paver==1.2.0
 nose==1.2.1
+paramiko==1.10.0
+pycrypto==2.6
 web.py==0.37
 wsgiref==0.1.2
