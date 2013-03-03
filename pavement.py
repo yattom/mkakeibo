@@ -23,16 +23,13 @@ FITNESSE_OPTS = [
 
 @task
 def start_fitnesse(options):
-    #os.chdir('test/fitnesse')
     sh('start-fitnesse ' + ' '.join(FITNESSE_OPTS))
 
 @task
 def stop_fitnesse(options):
-    #os.chdir('test/fitnesse')
     sh('stop-fitnesse ' + ' '.join(FITNESSE_OPTS))
 
 @task
 def fitnesse(options):
-    #os.chdir('test/fitnesse')
     sh('run-fitnesse ' + ' '.join(FITNESSE_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=text"')
 
