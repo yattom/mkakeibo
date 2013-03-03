@@ -16,13 +16,23 @@ def test(options):
     sh('nosetests %s %s'%(' '.join(opts), ' '.join(files)))
 
 
+FITNESSE_OPTS = [
+    '-d %s'%(path('test/fitnesse').abspath()),
+    '-p 20942'
+]
+
 @task
 def start_fitnesse(options):
-    os.chdir('test/fitnesse')
-    sh('java -jar fitnesse.jar -e 0 -p 20942')
+    #os.chdir('test/fitnesse')
+    sh('start-fitnesse ' + ' '.join(FITNESSE_OPTS))
+
+@task
+def stop_fitnesse(options):
+    #os.chdir('test/fitnesse')
+    sh('stop-fitnesse ' + ' '.join(FITNESSE_OPTS))
 
 @task
 def fitnesse(options):
-    os.chdir('test/fitnesse')
-    sh('java -jar fitnesse.jar -p 20942 -c "MkakeiboTop.AcceptanceTests?test&format=text"')
+    #os.chdir('test/fitnesse')
+    sh('run-fitnesse ' + ' '.join(FITNESSE_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=text"')
 
