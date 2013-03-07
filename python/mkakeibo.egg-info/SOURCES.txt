@@ -1,0 +1,10 @@
+MANIFEST.in
+pavement.py
+paver-minilib.zip
+setup.py
+mkakeibo/web_main.py
+mkakeibo/web_main_test.py
+mkakeibo.egg-info/PKG-INFO
+mkakeibo.egg-info/SOURCES.txt
+mkakeibo.egg-info/dependency_links.txt
+mkakeibo.egg-info/top_level.txt

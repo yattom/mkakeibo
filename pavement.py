@@ -33,3 +33,8 @@ def stop_fitnesse(options):
 def fitnesse(options):
     sh('run-fitnesse ' + ' '.join(FITNESSE_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=xml" | grep "<.*>" > fitnesse-result.xml')
 
+@task
+def package(options):
+    filename = 'mkakeibo-%s.tar.gz'%(build_id)
+
+    sh('tar cvfz %s ./python'%(env.filename))
