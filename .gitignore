@@ -9,3 +9,4 @@ python/build
 python/dist
 *.pyc
 *.pyo
+paver-minilib.zip
