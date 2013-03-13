@@ -16,6 +16,21 @@ def test(options):
     sh('nosetests %s %s'%(' '.join(opts), ' '.join(files)))
 
 
+@task
+@cmdopts([
+    ('build-id=', 'b', '')
+])
+def build(options):
+    if path('build').exists():
+        sh('rm -rf build')
+    sh('mkdir -p build/python')
+    sh('paver sdist', cwd='python')
+    sh('cp python/dist/* build/python')
+
+    sh('mkdir -p dist')
+    sh('tar cvfz dist/mkakeibo.b%(build_id)s.tar.gz -C build .'%options.build)
+
+
 FITNESSE_OPTS = [
     '-d %s'%(path('test/fitnesse').abspath()),
     '-p 20942'

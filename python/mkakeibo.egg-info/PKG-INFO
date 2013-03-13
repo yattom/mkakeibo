@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: mkakeibo
+Version: 0.0
+Summary: mobile kakeibo
+Home-page: UNKNOWN
+Author: Yattom
+Author-email: tsutomu.yasui@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires: Fabric(==1.6.0)
+Requires: Paver(==1.2.0)
+Requires: nose(==1.2.1)
+Requires: paramiko(==1.10.0)
+Requires: pycrypto(==2.6)
+Requires: web.py(==0.37)
+Requires: wsgiref(==0.1.2)

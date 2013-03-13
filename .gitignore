@@ -5,5 +5,10 @@ python/bin
 python/include
 python/lib
 python/man
+python/build
+python/dist
 *.pyc
 *.pyo
+paver-minilib.zip
+build/
+dist/
