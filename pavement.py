@@ -32,13 +32,15 @@ def build(options):
 
 
 FITNESSE_OPTS = [
-    '-d %s'%(path('test/fitnesse').abspath()),
     '-p 20942'
+]
+FITNESSE_RUNNING_OPTS = FITNESSE_OPTS + [
+    '-d %s'%(path('test/fitnesse').abspath()),
 ]
 
 @task
 def start_fitnesse(options):
-    sh('start-fitnesse ' + ' '.join(FITNESSE_OPTS))
+    sh('start-fitnesse ' + ' '.join(FITNESSE_RUNNING_OPTS))
 
 @task
 def stop_fitnesse(options):
@@ -46,5 +48,5 @@ def stop_fitnesse(options):
 
 @task
 def fitnesse(options):
-    sh('run-fitnesse ' + ' '.join(FITNESSE_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=xml" | grep "<.*>" > fitnesse-result.xml')
+    sh('run-fitnesse ' + ' '.join(FITNESSE_RUNNING_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?test&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
 
