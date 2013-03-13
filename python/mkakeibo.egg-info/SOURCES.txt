@@ -1,6 +1,7 @@
 MANIFEST.in
 pavement.py
 paver-minilib.zip
+requirements.txt
 setup.py
 mkakeibo/web_main.py
 mkakeibo/web_main_test.py

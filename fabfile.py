@@ -3,8 +3,27 @@ from fabric.contrib import files
 
 @task
 def deploy(build_id):
-    env.filename = 'mkakeibo-%s.tar.gz'%(build_id)
-    put(env.filename, env.filename)
+    undeploy()
+    env.filename = 'mkakeibo.b%s.tar.gz'%(build_id)
+    put('dist/' + env.filename)
+    run('mkdir mkakeibo')
+    run('tar zxvf %s -C mkakeibo'%(env.filename))
+
+    _deploy_python()
+
+def _deploy_python():
+    run('tar zxvf mkakeibo/python/mkakeibo-0.0.tar.gz --strip-components=1 -C mkakeibo/python')
+    with cd('mkakeibo/python'):
+        run('pip install -r requirements.txt')
+        run('paver start', pty=False) # pty=False is required to run as a daemon
+
+
+@task
+def undeploy():
+    if files.exists('mkakeibo'):
+        with cd('mkakeibo/python'):
+            run('paver stop')
+        run('rm -rf mkakeibo')
 
 
 @task
@@ -12,14 +31,15 @@ def create_environment():
     put('env/.profile', '.profile')
     run('mkdir -p work')
     with cd('work'):
-        run('sudo apt-get install libssl-dev')
+        # TODO: do something for tasks require root privilege
+        #run('sudo apt-get install libssl-dev')
         _install_python()
         _install_python_packages()
 
 
 @task
 def clear_environment():
-    run('rmdir -rf work bin lib shared include')
+    run('rm -rf work bin lib share include')
 
 
 def _install_python():
