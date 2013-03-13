@@ -16,6 +16,6 @@
 
 |''shutdown browser automatically''|true|
 
-|''get url''|http://127.0.0.1:8000|
+|''get url''|http://127.0.0.1:8081|
 
 |''page source''|'''contains'''|Hi|
