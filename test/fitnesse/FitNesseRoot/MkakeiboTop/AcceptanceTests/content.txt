@@ -10,12 +10,6 @@
 
 !contents -R2 -g -p -f -h
 
-!|fitlibrary.spider.SpiderFixture|
+[[AcceptanceTests.TopShouldDisplay]]
+[[AcceptanceTests.EntryPage]]
 
-|''start spider with''|firefox|
-
-|''shutdown browser automatically''|true|
-
-|''get url''|http://127.0.0.1:8081|
-
-|''page source''|'''contains'''|Hi|
