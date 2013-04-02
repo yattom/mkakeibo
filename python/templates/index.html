@@ -1,0 +1,23 @@
+$def with(form)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mkakeibo</title>
+</head>
+
+<body>
+  <form action='entry'>
+    <div>
+      $:form.get('month').render()
+      月
+      $:form.get('day').render()
+      日
+    </div>
+    <div>
+      $:form.get('category').render()
+    </div>
+  </form>
+</body>
+
+</html>
+
