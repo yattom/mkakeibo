@@ -10,5 +10,10 @@ Top page should display.
 
 |''get url''|http://127.0.0.1:8081|
 
-|''page source''|'''contains'''|Hi|
+|element|css=select[name=month]|exists|
+|element|css=select[name=day]|exists|
+|element|css=select[name=category]|exists|
+
+
+
 
