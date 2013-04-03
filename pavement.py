@@ -2,18 +2,17 @@ from paver.easy import *
 from paver.path import path
 import os
 
+project_root = os.path.abspath(os.path.dirname(__file__))
+
 @task
 @cmdopts([
     ('format=', 'f', 'output format [silent, verbose, xunit]')
 ])
 def test(options):
     format = options.test.format if 'format' in options.test else 'silent'
-    opts = ['--with-doctest']
-    if format == 'verbose': opts.append('--verbose')
-    if format == 'xunit': opts.append('--with-xunit')
-
-    files = path('python/mkakeibo').walk('*.py')
-    sh('nosetests %s %s'%(' '.join(opts), ' '.join(files)))
+    opts = ['--format=%s'%(format)]
+    os.chdir('python')
+    sh('paver test ' + ' '.join(opts))
 
 
 @task

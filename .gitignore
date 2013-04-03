@@ -4,3 +4,4 @@ paver-minilib.zip
 build/
 dist/
 fitnesse-result.xml
+nosetests.xml
