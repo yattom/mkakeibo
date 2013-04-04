@@ -9,3 +9,4 @@ mkakeibo.egg-info/PKG-INFO
 mkakeibo.egg-info/SOURCES.txt
 mkakeibo.egg-info/dependency_links.txt
 mkakeibo.egg-info/top_level.txt
+templates/index.html

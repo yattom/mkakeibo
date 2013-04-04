@@ -2,3 +2,4 @@ include setup.py
 include pavement.py
 include paver-minilib.zip
 include requirements.txt
+include templates/*.html
