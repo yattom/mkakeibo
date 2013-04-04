@@ -1,4 +1,4 @@
-|MkakeiboTop.AcceptanceTests.TopShouldDisplay||10:10:56 水, 4 03, 2013|
+|MkakeiboTop.AcceptanceTests.TopShouldDisplay||16:47:40 木, 4 04, 2013|
 |MkakeiboTop.AcceptanceTests.EntryPage||10:03:59 水, 4 03, 2013|
 |MkakeiboTop.AcceptanceTests||10:18:52 日, 3 31, 2013|
 |MkakeiboTop.EntryPage||10:08:59 日, 3 31, 2013|
