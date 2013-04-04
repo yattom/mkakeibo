@@ -1,0 +1,73 @@
+!contents -R2 -g -p -f -h
+
+ドライバ(ブラウザ)によって挙動が違うものもある。
+
+URLを開く open url
+|''get url''|http://localhost:@{serverPort}/files/@{webDriver.driver}/test.html|
+
+タイトルを確認する confirm title
+|''title''|'''is'''|A title|
+|''title''|'''becomes'''|A title|
+
+URLを確認する confirm url
+|''url''|'''matches'''|http://localhost.*/files/.*/test.html|
+
+戻る、進む、再表示 back, forward and reload
+|''back''|
+|''forward''|
+|''refresh page''|
+
+リンクをクリックする
+|''click on named link''|Link|
+|''click''|id|
+2番目のはid属性指定
+
+テキストを確認する(要素内テキスト, 入力テキスト INPUT type=TEXT|PASSWORD, TEXTAREA) confirm text
+|''text of''|css=input[id=withValue]|''is''|red|
+|''text of''|//textarea[@id="withMultiText"]|''matches''|yellow.*orange|
+|''plain text of''|css=input[id=withValue]|''is''|red|
+タグは取り除かれる
+''plain text of''はタグや空白を取り除く?
+
+innterHtmlを確認する confirm innerHtml
+|''inner html of''|//td[@class="bodyCopy"]|'''is'''|<p>This text will be preserved with <b>bold</b> tags and <em>emphasis</em> tags etc</p>|
+
+テキストを入力する (DIVやPにも使える?) set / add text
+|''with''|css=input#withValue|''set text''|RED|
+|''with''|css=input#withValue|''add text''|RED|
+
+ページ中のテキストを確認する confirm text somewhere in the page
+|''page source''|'''contains'''|lines|
+|''page source''|'''eventually contains'''|Various text|
+|''page source''|'''matches'''|sp.*d|
+部分文字列は開始部分と終了部分の文字列を指定する (exclusive) 
+|''page substring from''|spread|''to''|sev|''matches''|.over|
+|''page substring from''|te|''to''|t|''is''|x|
+
+要素を確認する confirm element, attributes, count
+|''element''|//dv[@id="divv"]|''exists''|
+|''element''|name=pp|''exists''|
+|''element''|//input[@id="missing"]|''does not exist''|
+|''element value''|//input[@id="in"]|'''is'''|t|
+|''attribute''|value|''of''|//input[@id="in"]|''is''|abc|
+|''attribute''|id|''of''|//dvv[@id="divv"]|''is''|divv|
+|'''not'''|''attribute''|class|''of''|//p|''exists''|
+|''count of''|//pq[@id="p"]|''is''|3|
+
+
+クッキー操作 cookies
+|''delete all cookies''|
+
+|''add cookie''|brownie|''with value''|chocolate|
+
+|''cookies''|
+|''name''|''value''|''path''|
+|brownie|chocolate|/|
+
+|''delete cookie''|brownie|
+
+|''cookies''|
+|''name''|''value''|
+
+
+

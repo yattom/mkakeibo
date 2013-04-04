@@ -13,3 +13,5 @@
 [[AcceptanceTests.TopShouldDisplay]]
 [[AcceptanceTests.EntryPage]]
 
+テストを書くお供に SpideWebCheatsheet
+
