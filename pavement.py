@@ -29,23 +29,26 @@ def build(options):
     sh('mkdir -p dist')
     sh('tar cvfz dist/mkakeibo.b%(build_id)s.tar.gz -C build .'%options.build)
 
+FITNESSE_SERVER_PORT = 20942
 
-FITNESSE_OPTS = [
-    '-p 20942'
-]
-FITNESSE_RUNNING_OPTS = FITNESSE_OPTS + [
-    '-d %s'%(path('test/fitnesse').abspath()),
-]
+def fitnesse_opts(port, dir_flag=False):
+    opts= [
+        '-p %d'%(port),
+    ]
+    if dir_flag:
+        opts.append('-d %s'%(path('test/fitnesse').abspath()))
+    return opts
+
 
 @task
 def start_fitnesse(options):
-    sh('start-fitnesse ' + ' '.join(FITNESSE_RUNNING_OPTS))
+    sh('start-fitnesse ' + ' '.join(fitnesse_opts(FITNESSE_SERVER_PORT, dir_flag=True)))
 
 @task
 def stop_fitnesse(options):
-    sh('stop-fitnesse ' + ' '.join(FITNESSE_OPTS))
+    sh('stop-fitnesse ' + ' '.join(fitnesse_opts(FITNESSE_SERVER_PORT)))
 
 @task
 def fitnesse(options):
-    sh('run-fitnesse ' + ' '.join(FITNESSE_RUNNING_OPTS) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
+    sh('run-fitnesse ' + ' '.join(fitnesse_opts(20943, True)) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
 
