@@ -17,7 +17,14 @@ Top page should display.
 |element|css=input[name=description]|exists|
 |element|css=button[type=submit]|exists|
 
+|with|css=select[name=month]|select option|4|
+|with|css=select[name=day]|select option|20|
+|with|css=select[name=category]|select option|その他|
+|with|css=input[name=amount]|set text|1000|
+|with|css=input[name=description]|set text|プレゼント|
+|click|css=button[type=submit]|
 
+|page source|contains|登録しました|
 
 
 

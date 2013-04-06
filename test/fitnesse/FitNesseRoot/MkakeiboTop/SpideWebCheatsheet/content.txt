@@ -1,5 +1,9 @@
 !contents -R2 -g -p -f -h
 
+see also 
+ * <FitLibraryWeb.SpiderFixture.DocuMentation.CommandUserGuide
+ * <FitLibraryWeb.SpiderFixture.SpecifySpiderFixture
+
 ドライバ(ブラウザ)によって挙動が違うものもある。
 
 URLを開く open url
@@ -54,6 +58,16 @@ innterHtmlを確認する confirm innerHtml
 |'''not'''|''attribute''|class|''of''|//p|''exists''|
 |''count of''|//pq[@id="p"]|''is''|3|
 
+SELECT操作 select options
+|''option of''|//select[@name="colour"]|'''is'''|red|
+|''with''|//select[@name="colour"]|''select option''|red|
+|''with''|//select[@name="colour"]|''select option at''|4|
+|''option of''|//select[@name="colour"]|''is not selected''|
+全OPTIONまとめて確認
+|''options''|//select[@name='infants']|
+|''text''|''value''|''selected''|
+|first|First|false|
+|second|Second|false|
 
 クッキー操作 cookies
 |''delete all cookies''|
