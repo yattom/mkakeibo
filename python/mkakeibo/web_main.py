@@ -3,7 +3,11 @@
 import web
 import datetime
 
-urls = ('/', 'Index')
+urls = (
+    '/', 'Index',
+    '/entry', 'Entry',
+)
+
 render = web.template.render('templates/')
 
 CATEGORIES = [
@@ -41,7 +45,7 @@ entry_form = web.form.Form(
 class Index:
   def GET(self):
     print "GET!!!"
-    return render.index(entry_form)
+    return render.index(entry_form())
 
 if __name__=='__main__':
     print "run"
@@ -49,3 +53,9 @@ if __name__=='__main__':
     app.run()
 
 
+class Entry:
+    def POST(self):
+        print "POST!!!"
+        f = entry_form()
+        print f.d
+        return "登録しました"
