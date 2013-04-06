@@ -43,14 +43,9 @@ entry_form = web.form.Form(
 )
 
 class Index:
-  def GET(self):
-    print "GET!!!"
-    return render.index(entry_form())
-
-if __name__=='__main__':
-    print "run"
-    app = web.application(urls, globals())
-    app.run()
+    def GET(self):
+        print "GET!!!"
+        return render.index(entry_form())
 
 
 class Entry:
@@ -59,3 +54,9 @@ class Entry:
         f = entry_form()
         print f.d
         return "登録しました"
+
+
+if __name__=='__main__':
+    print "run"
+    app = web.application(urls, globals())
+    app.run()
