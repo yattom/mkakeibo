@@ -15,7 +15,7 @@ Top page should display.
 |element|css=select[name=category]|exists|
 |element|css=input[name=amount]|exists|
 |element|css=input[name=description]|exists|
-|element|css=input[type=submit]|exists|
+|element|css=button[type=submit]|exists|
 
 
 

@@ -23,7 +23,19 @@ entry_form = web.form.Form(
     web.form.Dropdown(
         name='category',
         args=CATEGORIES
-    )
+    ),
+    web.form.Textbox(
+        name='amount',
+        size=6,
+    ),
+    web.form.Textbox(
+        name='description'
+    ),
+    web.form.Button(
+        name='add',
+        type='submit',
+        html=u'登録する'
+    ),
 )
 
 class Index:
