@@ -29,6 +29,8 @@ def start():
 @task
 def stop():
     ps = paver.easy.sh('ps -o pid,cmd -u `id -u`', capture=True)
+    print 'DEBUG: '
+    print ps
     for pid, cmd in [p.split(' ', 1) for p in ps.split('\n') if len(p) > 0]:
         if re.search('^python mkakeibo/web_main.py', cmd):
             sh('kill %s'%(pid))
