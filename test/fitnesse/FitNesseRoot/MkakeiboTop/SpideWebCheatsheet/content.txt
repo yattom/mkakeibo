@@ -57,6 +57,7 @@ innterHtmlを確認する confirm innerHtml
 |''attribute''|id|''of''|//dvv[@id="divv"]|''is''|divv|
 |'''not'''|''attribute''|class|''of''|//p|''exists''|
 |''count of''|//pq[@id="p"]|''is''|3|
+''count of''はXPathしか使えない?
 
 SELECT操作 select options
 |''option of''|//select[@name="colour"]|'''is'''|red|
