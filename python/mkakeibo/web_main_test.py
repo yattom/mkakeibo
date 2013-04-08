@@ -3,7 +3,7 @@ import datetime
 
 import web_main
 
-class mockdate(object):
+class mock_today(object):
     def __init__(self, year, month, day):
         self.date = datetime.date(year, month, day)
 
@@ -38,8 +38,8 @@ class IndexTest(unittest.TestCase):
         content = target.GET()
         self.assertIsNotNone(content)
 
-    def test_form_default_values(self):
-        with mockdate(2001, 2, 3):
+    def test_form_default_is_today(self):
+        with mock_today(2001, 2, 3):
             target = web_main.Index()
             content = target.GET()
             form = web_main.render.received_form
