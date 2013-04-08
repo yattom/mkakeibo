@@ -18,12 +18,10 @@ CATEGORIES = [
 entry_form = web.form.Form(
     web.form.Dropdown(
         name='month',
-        args=range(1,13),
-        value=datetime.date.today().month),
+        args=range(1,13)),
     web.form.Dropdown(
         name='day',
-        args=range(1,31),
-        value=datetime.date.today().day),
+        args=range(1,31)),
     web.form.Dropdown(
         name='category',
         args=CATEGORIES
@@ -45,7 +43,10 @@ entry_form = web.form.Form(
 class Index:
     def GET(self):
         print "GET!!!"
-        return render.index(entry_form())
+        form = entry_form()
+        form['month'].value = datetime.date.today().month
+        form['day'].value = datetime.date.today().day
+        return render.index(form)
 
 
 class Entry:

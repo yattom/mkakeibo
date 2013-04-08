@@ -1,6 +1,22 @@
 import unittest
+import datetime
 
 import web_main
+
+class mockdate(object):
+    def __init__(self, year, month, day):
+        self.date = datetime.date(year, month, day)
+
+    def __enter__(self):
+        self.org_date = datetime.date
+        d = self.date
+        class MockDate(object):
+            def today(self):
+                return d
+        datetime.date = MockDate()
+
+    def __exit__(self, type, value, traceback):
+        datetime.date = self.org_date
 
 class IndexTest(unittest.TestCase):
     def setUp(self):
@@ -23,8 +39,9 @@ class IndexTest(unittest.TestCase):
         self.assertIsNotNone(content)
 
     def test_form_default_values(self):
-        target = web_main.Index()
-        content = target.GET()
-        form = web_main.render.received_form
-        self.assertEqual(4, form['month'].value)
-        self.assertEqual(8, form['day'].value)
+        with mockdate(2001, 2, 3):
+            target = web_main.Index()
+            content = target.GET()
+            form = web_main.render.received_form
+            self.assertEqual(2, form['month'].value)
+            self.assertEqual(3, form['day'].value)
