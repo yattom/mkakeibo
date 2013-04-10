@@ -30,25 +30,29 @@ def build(options):
     sh('tar cvfz dist/mkakeibo.b%(build_id)s.tar.gz -C build .'%options.build)
 
 FITNESSE_SERVER_PORT = 20942
+FITNESSE_ONESHOT_PORT = 20942
 
-def fitnesse_opts(port, dir_flag=False):
+def fitnesse_opts(port):
     opts= [
         '-p %d'%(port),
     ]
-    if dir_flag:
-        opts.append('-d %s'%(path('test/fitnesse').abspath()))
     return opts
 
 
 @task
 def start_fitnesse(options):
-    sh('start-fitnesse ' + ' '.join(fitnesse_opts(FITNESSE_SERVER_PORT, dir_flag=True)))
+    os.chdir('test/fitnesse')
+    cmd = 'java -jar fitnesse.jar ' + ' '.join(fitnesse_opts(FITNESSE_SERVER_PORT))
+    if os.name == 'nt':
+        sh('start ' + cmd)
+    else:
+        sh(cmd + ' &')
 
 @task
 def stop_fitnesse(options):
-    sh('stop-fitnesse ' + ' '.join(fitnesse_opts(FITNESSE_SERVER_PORT)))
+    sh('java -cp fitnesse.jar fitnesse.Shutdown -p %d'%(FITNESSE_SERVER_PORT))
 
 @task
 def fitnesse(options):
-    sh('run-fitnesse ' + ' '.join(fitnesse_opts(20943, True)) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
+    sh('run-fitnesse ' + ' '.join(fitnesse_opts(FITNESSE_ONESHOT_PORT)) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
 
