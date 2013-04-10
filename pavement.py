@@ -35,6 +35,9 @@ FITNESSE_ONESHOT_PORT = 20942
 def fitnesse_opts(port):
     opts= [
         '-p %d'%(port),
+        '-o',
+        '-e 0',
+        '-l fitnesse.log'
     ]
     return opts
 
@@ -54,5 +57,5 @@ def stop_fitnesse(options):
 
 @task
 def fitnesse(options):
-    sh('run-fitnesse ' + ' '.join(fitnesse_opts(FITNESSE_ONESHOT_PORT)) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
+    sh('java -jar fitnesse.jar ' + ' '.join(fitnesse_opts(FITNESSE_ONESHOT_PORT)) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
 
