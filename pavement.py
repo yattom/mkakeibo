@@ -40,7 +40,7 @@ def build(options):
     sh('tar cvfz dist/mkakeibo.b%(build_id)s.tar.gz -C build .'%options.build)
 
 FITNESSE_SERVER_PORT = 20942
-FITNESSE_ONESHOT_PORT = 20942
+FITNESSE_ONESHOT_PORT = 20943
 
 def fitnesse_opts(port):
     opts= [
