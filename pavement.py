@@ -4,6 +4,16 @@ import os
 
 project_root = os.path.abspath(os.path.dirname(__file__))
 
+def chdir(path):
+    class Chdir(object):
+        def __enter__(self):
+            self.cwd = os.getcwd()
+            os.chdir(path)
+
+        def __exit__(self, *args):
+            os.chdir(self.cwd)
+    return Chdir()
+
 @task
 @cmdopts([
     ('format=', 'f', 'output format [silent, verbose, xunit]')
@@ -11,8 +21,8 @@ project_root = os.path.abspath(os.path.dirname(__file__))
 def test(options):
     format = options.test.format if 'format' in options.test else 'silent'
     opts = ['--format=%s'%(format)]
-    os.chdir('python')
-    sh('paver test ' + ' '.join(opts))
+    with chdir('python'):
+        sh('paver test ' + ' '.join(opts))
 
 
 @task
@@ -37,25 +47,27 @@ def fitnesse_opts(port):
         '-p %d'%(port),
         '-o',
         '-e 0',
-        '-l fitnesse.log'
+        '-l log'
     ]
     return opts
 
 
 @task
 def start_fitnesse(options):
-    os.chdir('test/fitnesse')
-    cmd = 'java -jar fitnesse.jar ' + ' '.join(fitnesse_opts(FITNESSE_SERVER_PORT))
-    if os.name == 'nt':
-        sh('start ' + cmd)
-    else:
-        sh(cmd + ' &')
+    with chdir('test/fitnesse'):
+        cmd = 'java -jar fitnesse.jar ' + ' '.join(fitnesse_opts(FITNESSE_SERVER_PORT))
+        if os.name == 'nt':
+            sh('start ' + cmd)
+        else:
+            sh(cmd + ' &')
 
 @task
 def stop_fitnesse(options):
-    sh('java -cp fitnesse.jar fitnesse.Shutdown -p %d'%(FITNESSE_SERVER_PORT))
+    with chdir('test/fitnesse'):
+        sh('java -cp fitnesse.jar fitnesse.Shutdown -p %d'%(FITNESSE_SERVER_PORT))
 
 @task
 def fitnesse(options):
-    sh('java -jar fitnesse.jar ' + ' '.join(fitnesse_opts(FITNESSE_ONESHOT_PORT)) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
+    with chdir('test/fitnesse'):
+        sh('java -jar fitnesse.jar ' + ' '.join(fitnesse_opts(FITNESSE_ONESHOT_PORT)) + ' -c "MkakeiboTop.AcceptanceTests?suite&format=xml" | awk "/^<\?xml/{out=1}/^<\/testResults>/{print;out=0}out==1{print}" > fitnesse-result.xml')
 
